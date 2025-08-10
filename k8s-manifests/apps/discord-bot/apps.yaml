@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: weather-notice-bot-v2
+  namespace: argocd
+spec:
+  project: weather-notice-bot-v2
+  source:
+    repoURL: https://github.com/kurazuuuuuu/WeatherNoticeBot_V2
+    targetRevision: main
+    path: k8s-manifests/deployment.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: 'weather-notice-bot-v2'
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: true
+    syncOptions:
+      - CreateNamespace=true
+    retry:
+      limit: -1
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 2m
