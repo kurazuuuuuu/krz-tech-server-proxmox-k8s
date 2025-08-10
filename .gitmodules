@@ -1,0 +1,3 @@
+[submodule "k8s-manifests/secrets"]
+	path = k8s-manifests/secrets
+	url = https://github.com/kurazuuuuuu/krz-tech-server-proxmox-k8s-secret.git
